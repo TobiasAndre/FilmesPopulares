@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FilmesPopulares</string>
+    <string name="faltando_release_date">Release date desconhecido</string>
 </resources>

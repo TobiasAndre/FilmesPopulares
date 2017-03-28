@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_downloading_poster">http://image.tmdb.org/t/p/w342</string>
+    <string name="url_downloading_backdrop">http://image.tmdb.org/t/p/original</string>
+    <integer name="grid_number_cols">2</integer>
+    <dimen name="title_padding_for_grid">16dp</dimen>
+</resources>
