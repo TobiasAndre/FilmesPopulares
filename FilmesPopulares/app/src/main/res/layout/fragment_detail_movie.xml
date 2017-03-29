@@ -84,6 +84,8 @@
 
         </LinearLayout>
 
+
+
         <TextView
             android:id="@+id/movie_overview"
             style="?android:attr/textAppearanceMedium"

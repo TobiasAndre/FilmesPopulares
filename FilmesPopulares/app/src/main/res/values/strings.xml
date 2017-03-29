@@ -13,6 +13,7 @@
     <string name="compartilhar_trailer">Compartilhar</string>
     <string name="add_favoritos">Adicionar aos Favoritos</string>
     <string name="remover_de_favoritos">Remover dos Favoritos</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="avaliacao_filme">Avaliação: %1$s/10</string>
     <string name="assistir_trailer">Assistir Trailer</string>
+
 </resources>

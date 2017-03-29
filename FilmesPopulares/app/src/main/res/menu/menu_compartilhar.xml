@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_compartilhar"
+        android:id="@+id/compartilhar"
         android:icon="@drawable/ic_compartilhar_24dp"
         android:title="@string/compartilhar_trailer"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"

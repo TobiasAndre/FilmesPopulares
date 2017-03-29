@@ -25,7 +25,7 @@ public class GetTrailersTask extends AsyncTask<Long, Void, List<Trailer>> {
     /**
      * Interface definition for a callback to be invoked when trailers are loaded.
      */
-    interface Listener {
+    public interface Listener {
         void onFetchFinished(List<Trailer> trailers);
     }
 
