@@ -19,7 +19,8 @@ import com.tobiasandre.filmespopulares.networkutils.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
@@ -114,9 +115,9 @@ public interface Callbacks {
 
 public class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
-    @BindView(R.id.poster)
+    @Bind(R.id.poster)
     ImageView mPosterView;
-    @BindView(R.id.titulo)
+    @Bind(R.id.titulo)
     TextView mTitleView;
     public Movie mMovie;
 

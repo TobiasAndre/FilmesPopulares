@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">FilmesPopulares</string>
     <string name="faltando_release_date">Release date desconhecido</string>
+    <string name="ordem_por">Ordenar</string>
+    <string name="ordem_por_mais_popular">Mais Popular</string>
+    <string name="ordem_por_mais_votados">Mais Votados</string>
+    <string name="ordem_por_favoritos">Favoritos</string>
+    <string name="titulo_view_offline">Offline</string>
+    <string name="texto_view_offline">Sem conexão com A Internet,ou servidor indisponível.</string>
+    <string name="titulo_sem_favoritos">Favoritos</string>
+    <string name="texto_sem_favoritos">Sua Lista de Filmes Favoritos está vazia.</string>
+    <string name="titulo_detalhe_filme">Detalhes</string>
+    <string name="compartilhar_trailer">Compartilhar</string>
+    <string name="add_favoritos">Adicionar aos Favoritos</string>
+    <string name="remover_de_favoritos">Remover dos Favoritos</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="assistir_trailer">Assistir Trailer</string>
 </resources>

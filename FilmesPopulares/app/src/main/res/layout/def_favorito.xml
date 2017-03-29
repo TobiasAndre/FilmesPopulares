@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_add_favoritos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_vertical_margin"
+        android:text="@string/add_favoritos"
+        android:theme="@style/Botao.Vermelho"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/btn_remover_de_favoritos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_vertical_margin"
+        android:text="@string/remover_de_favoritos"
+        android:theme="@style/Botao.Vermelho"
+        android:visibility="gone" />
+
+</LinearLayout>
