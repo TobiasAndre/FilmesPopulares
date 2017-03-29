@@ -48,7 +48,7 @@ public class GetTrailersTask extends AsyncTask<Long, Void, List<Trailer>> {
 
         MoviesService service = retrofit.create(MoviesService.class);
         Call<Trailers> call = service.findTrailersById(movieId,
-                "2c1be48835a7404bf20492a41450ab8a");
+                "");/* api key *************/
         try {
             Response<Trailers> response = call.execute();
             Trailers trailers = response.body();

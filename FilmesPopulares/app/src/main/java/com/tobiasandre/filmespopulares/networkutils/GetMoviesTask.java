@@ -82,7 +82,7 @@ public class GetMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
         MoviesService service = retrofit.create(MoviesService.class);
         Call<Movies> call = service.discoverMovies(mSortBy,
-                "2c1be48835a7404bf20492a41450ab8a");// api_key
+                "");// api_key ***************
         try {
             Response<Movies> response = call.execute();
             Movies movies = response.body();
