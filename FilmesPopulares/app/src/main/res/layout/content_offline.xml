@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -27,5 +27,14 @@
         android:layout_gravity="center"
         android:text="@string/texto_view_offline"
         android:textColor="@color/view_offline_text_color" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/btn_reload"
+        android:layout_gravity="center"
+        android:background="@drawable/round_button"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:src="@mipmap/ic_renew"/>
 
 </LinearLayout>

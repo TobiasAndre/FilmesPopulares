@@ -1,4 +1,4 @@
-package com.tobiasandre.filmespopulares.networkutils;
+package com.tobiasandre.filmespopulares.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,6 +1,7 @@
-package com.tobiasandre.filmespopulares.networkutils;
+package com.tobiasandre.filmespopulares.model.Lists;
 
 import com.google.gson.annotations.SerializedName;
+import com.tobiasandre.filmespopulares.model.Trailer;
 
 import java.util.ArrayList;
 import java.util.List;

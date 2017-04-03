@@ -3,6 +3,10 @@ package com.tobiasandre.filmespopulares.networkutils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.tobiasandre.filmespopulares.BuildConfig;
+import com.tobiasandre.filmespopulares.model.Lists.Trailers;
+import com.tobiasandre.filmespopulares.model.Trailer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GetTrailersTask extends AsyncTask<Long, Void, List<Trailer>> {
 
     @SuppressWarnings("unused")
-    public static String LOG_TAG = GetTrailersTask.class.getSimpleName();
+    public static String TAG = GetTrailersTask.class.getSimpleName();
     private final Listener mListener;
 
     /**
@@ -48,13 +52,13 @@ public class GetTrailersTask extends AsyncTask<Long, Void, List<Trailer>> {
 
         MoviesService service = retrofit.create(MoviesService.class);
         Call<Trailers> call = service.findTrailersById(movieId,
-                "");/* api key *************/
+                BuildConfig.apy_key);/* api key *************/
         try {
             Response<Trailers> response = call.execute();
             Trailers trailers = response.body();
             return trailers.getTrailers();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "A problem occurred talking to the movie db ", e);
+            Log.e(TAG, "Erro ao obter trailers:", e);
         }
 
         return null;

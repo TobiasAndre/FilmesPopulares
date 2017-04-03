@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.tobiasandre.filmespopulares.R;
-import com.tobiasandre.filmespopulares.networkutils.Trailer;
+import com.tobiasandre.filmespopulares.model.Trailer;
 
 import java.util.ArrayList;
 import java.util.List;

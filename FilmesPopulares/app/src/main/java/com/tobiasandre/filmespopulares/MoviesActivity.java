@@ -2,6 +2,8 @@ package com.tobiasandre.filmespopulares;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -15,12 +17,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.tobiasandre.filmespopulares.adapter.MovieAdapter;
 import com.tobiasandre.filmespopulares.data.FilmesPopularesContract;
 import com.tobiasandre.filmespopulares.networkutils.CommandExec;
 import com.tobiasandre.filmespopulares.networkutils.GetMoviesTask;
-import com.tobiasandre.filmespopulares.networkutils.Movie;
+import com.tobiasandre.filmespopulares.model.Movie;
+import com.tobiasandre.filmespopulares.networkutils.Utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,8 @@ import butterknife.ButterKnife;
 public class MoviesActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         GetMoviesTask.Listener ,MovieAdapter.Callbacks {
 
+
+    private boolean mTablet;
     private MovieAdapter mAdapter;
     private String mSortBy = GetMoviesTask.POPULAR;
     private RetainedFragment mRetainedFragment;
@@ -49,6 +55,7 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
 
+
         mToolbar.setTitle(R.string.app_name);
         setSupportActionBar(mToolbar);
 
@@ -66,6 +73,8 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         mAdapter = new MovieAdapter(new ArrayList<Movie>(), this);
         mRecyclerView.setAdapter(mAdapter);
 
+        mTablet = findViewById(R.id.movie_detail_container) != null;
+
 
         if (savedInstanceState != null) {
             mSortBy = savedInstanceState.getString(ORDEM_EXTRAS);
@@ -73,6 +82,10 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
                 List<Movie> movies = savedInstanceState.getParcelableArrayList(FILMES_EXTRAS);
                 mAdapter.add(movies);
                 findViewById(R.id.progressao).setVisibility(View.GONE);
+
+                if (mSortBy.equals(GetMoviesTask.FAVORITO)) {
+                    getSupportLoaderManager().initLoader(LOAD_FAVORITE_MOVIES, null, this);
+                }
             }
             updateEmptyState();
         } else {
@@ -145,13 +158,40 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     private void getMovies(String sortBy) {
-        if (!sortBy.equals(GetMoviesTask.FAVORITO)) {
-            findViewById(R.id.progressao).setVisibility(View.VISIBLE);
-            GetMoviesTask.NotifyTaskCompletedCommand command =
-                    new GetMoviesTask.NotifyTaskCompletedCommand(this.mRetainedFragment);
-            new GetMoviesTask(sortBy, command).execute();
-        } else {
-            getSupportLoaderManager().initLoader(LOAD_FAVORITE_MOVIES, null, this);
+
+        final ImageButton btnReload = (ImageButton)findViewById(R.id.btn_reload);
+        if(btnReload!=null){
+            btnReload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getMovies(mSortBy);
+                }
+            });
+        }
+
+        if (Utilidades.isNetworkConnected(this.getBaseContext())) {
+            if (!sortBy.equals(GetMoviesTask.FAVORITO)) {
+                findViewById(R.id.progressao).setVisibility(View.VISIBLE);
+                GetMoviesTask.NotifyTaskCompletedCommand command =
+                        new GetMoviesTask.NotifyTaskCompletedCommand(this.mRetainedFragment);
+                new GetMoviesTask(sortBy, command).execute();
+            } else {
+                getSupportLoaderManager().initLoader(LOAD_FAVORITE_MOVIES, null, this);
+            }
+        }else{
+
+
+            final CoordinatorLayout MainCoordinatorLayout = (CoordinatorLayout) findViewById(R.id
+                    .MainCoordinatorLayout);
+
+            Snackbar snackbar = Snackbar.make(MainCoordinatorLayout, getString(R.string.texto_offline), Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction(getString(R.string.retry), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    btnReload.callOnClick();
+                }
+            });
+            snackbar.show();
         }
     }
 
@@ -208,7 +248,6 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
             findViewById(R.id.progressao).setVisibility(View.GONE);
         }
     }
-
 
     public static class RetainedFragment extends Fragment implements GetMoviesTask.Listener {
 

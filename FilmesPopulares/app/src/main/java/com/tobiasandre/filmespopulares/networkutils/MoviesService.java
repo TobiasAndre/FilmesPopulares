@@ -1,5 +1,9 @@
 package com.tobiasandre.filmespopulares.networkutils;
 
+import com.tobiasandre.filmespopulares.model.Lists.Movies;
+import com.tobiasandre.filmespopulares.model.Lists.Reviews;
+import com.tobiasandre.filmespopulares.model.Lists.Trailers;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

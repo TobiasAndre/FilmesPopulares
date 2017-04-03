@@ -15,5 +15,6 @@
     <string name="remover_de_favoritos">Remover dos Favoritos</string>
     <string name="avaliacao_filme">Avaliação: %1$s/10</string>
     <string name="assistir_trailer">Assistir Trailer</string>
-
+    <string name="texto_offline">Sem Internet?</string>
+    <string name="retry">Tentar Novamente</string>
 </resources>

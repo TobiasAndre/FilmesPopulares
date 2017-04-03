@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/movie_date_vertical_padding"
-                android:textColor="@color/text_color_black"
+                android:textColor="@color/navy"
                 android:textIsSelectable="true" />
 
         </LinearLayout>
@@ -103,6 +103,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/trailer_list_vertical_padding"
             tools:listitem="@layout/trailer_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/review_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/review_content" />
 
     </LinearLayout>
 </ScrollView>

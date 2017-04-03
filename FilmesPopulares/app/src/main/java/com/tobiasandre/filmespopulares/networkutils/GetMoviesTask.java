@@ -1,8 +1,13 @@
 package com.tobiasandre.filmespopulares.networkutils;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.StringDef;
 import android.util.Log;
+
+import com.tobiasandre.filmespopulares.BuildConfig;
+import com.tobiasandre.filmespopulares.model.Lists.Movies;
+import com.tobiasandre.filmespopulares.model.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,6 +75,7 @@ public class GetMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
             mCommand.mMovies = new ArrayList<>();
         }
         mCommand.execute();
+
     }
 
     @Override
@@ -82,7 +88,7 @@ public class GetMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
         MoviesService service = retrofit.create(MoviesService.class);
         Call<Movies> call = service.discoverMovies(mSortBy,
-                "");// api_key ***************
+                BuildConfig.apy_key);// api_key ***************
         try {
             Response<Movies> response = call.execute();
             Movies movies = response.body();
@@ -93,4 +99,6 @@ public class GetMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
         }
         return null;
     }
+
+
 }

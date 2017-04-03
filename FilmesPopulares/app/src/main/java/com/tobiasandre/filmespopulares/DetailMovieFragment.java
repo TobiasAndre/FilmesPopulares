@@ -2,7 +2,6 @@ package com.tobiasandre.filmespopulares;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -27,12 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.tobiasandre.filmespopulares.adapter.ReviewAdapter;
 import com.tobiasandre.filmespopulares.adapter.TrailerAdapter;
 import com.tobiasandre.filmespopulares.data.FilmesPopularesContract;
+import com.tobiasandre.filmespopulares.model.Review;
+import com.tobiasandre.filmespopulares.networkutils.GetReviewsTask;
 import com.tobiasandre.filmespopulares.networkutils.GetTrailersTask;
-import com.tobiasandre.filmespopulares.networkutils.Movie;
-import com.tobiasandre.filmespopulares.networkutils.Review;
-import com.tobiasandre.filmespopulares.networkutils.Trailer;
+import com.tobiasandre.filmespopulares.model.Movie;
+import com.tobiasandre.filmespopulares.model.Trailer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,19 +43,25 @@ import butterknife.ButterKnife;
 
 
 public class DetailMovieFragment extends Fragment implements GetTrailersTask.Listener,
-        TrailerAdapter.Callbacks {
+        TrailerAdapter.Callbacks, GetReviewsTask.Listener, ReviewAdapter.Callbacks {
 
     public static final String ARG_MOVIE = "ARG_MOVIE";
     public static final String TRAILERS_EXTRAS = "TRAILERS_EXTRAS";
+    public static final String REVIEWS_EXTRAS = "REVIEWS_EXTRAS";
 
 
     private Movie mMovie;
     private TrailerAdapter mTrailerListAdapter;
+    private ReviewAdapter mReviewAdapter;
     private ShareActionProvider mShareActionProvider;
 
 
     @Bind(R.id.trailer_list)
     RecyclerView mRecyclerViewForTrailers;
+
+    @Bind(R.id.review_list)
+    RecyclerView mRecyclerViewForReviews;
+
     @Bind(R.id.titulo_filme)
     TextView mMovieTitleView;
     @Bind(R.id.movie_overview)
@@ -134,6 +141,10 @@ public class DetailMovieFragment extends Fragment implements GetTrailersTask.Lis
         mRecyclerViewForTrailers.setAdapter(mTrailerListAdapter);
         mRecyclerViewForTrailers.setNestedScrollingEnabled(false);
 
+        mReviewAdapter = new ReviewAdapter(new ArrayList<Review>(), this);
+        mRecyclerViewForReviews.setAdapter(mReviewAdapter);
+
+
         if (savedInstanceState != null && savedInstanceState.containsKey(TRAILERS_EXTRAS)) {
             List<Trailer> trailers = savedInstanceState.getParcelableArrayList(TRAILERS_EXTRAS);
             mTrailerListAdapter.add(trailers);
@@ -141,6 +152,14 @@ public class DetailMovieFragment extends Fragment implements GetTrailersTask.Lis
         } else {
             fetchTrailers();
         }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(REVIEWS_EXTRAS)) {
+            List<Review> reviews = savedInstanceState.getParcelableArrayList(REVIEWS_EXTRAS);
+            mReviewAdapter.add(reviews);
+        } else {
+            fetchReviews();
+        }
+
 
         return rootView;
 
@@ -159,6 +178,13 @@ public class DetailMovieFragment extends Fragment implements GetTrailersTask.Lis
     }
 
     @Override
+    public void read(Review review, int position) {
+        startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(review.getUrl())));
+    }
+
+
+    @Override
     public void onFetchFinished(List<Trailer> trailers) {
         mTrailerListAdapter.add(trailers);
         mButtonWatchTrailer.setEnabled(!trailers.isEmpty());
@@ -169,10 +195,22 @@ public class DetailMovieFragment extends Fragment implements GetTrailersTask.Lis
         }
     }
 
+    @Override
+    public void onReviewsFetchFinished(List<Review> reviews) {
+        mReviewAdapter.add(reviews);
+    }
+
+
     private void fetchTrailers() {
         GetTrailersTask task = new GetTrailersTask(this);
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mMovie.getId());
     }
+
+    private void fetchReviews() {
+        GetReviewsTask task = new GetReviewsTask(this);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mMovie.getId());
+    }
+
 
     public void markAsFavorite() {
 
@@ -312,6 +350,7 @@ public class DetailMovieFragment extends Fragment implements GetTrailersTask.Lis
             outState.putParcelableArrayList(TRAILERS_EXTRAS, trailers);
         }
     }
+
 
 
 }

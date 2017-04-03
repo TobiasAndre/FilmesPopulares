@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
 import com.tobiasandre.filmespopulares.R;
 import com.tobiasandre.filmespopulares.data.FilmesPopularesContract;
-import com.tobiasandre.filmespopulares.networkutils.Movie;
+import com.tobiasandre.filmespopulares.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +30,14 @@ import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
-private final static String TAG = MovieAdapter.class.getSimpleName();
+    private final static String TAG = MovieAdapter.class.getSimpleName();
 
-private final ArrayList<Movie> mMovies;
-private final Callbacks mCallbacks;
+    private final ArrayList<Movie> mMovies;
+    private final Callbacks mCallbacks;
 
-public interface Callbacks {
-    void open(Movie movie, int position);
-}
+    public interface Callbacks {
+        void open(Movie movie, int position);
+    }
 
     public MovieAdapter(ArrayList<Movie> movies, Callbacks callbacks) {
         mMovies = movies;
