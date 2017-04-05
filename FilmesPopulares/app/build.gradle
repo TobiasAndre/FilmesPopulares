@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'apy_key', "\"informar_apikey\""
+        buildConfigField 'String', 'apy_key', "\"2c1be48835a7404bf20492a41450ab8a\""
     }
     buildTypes {
         release {
@@ -35,7 +35,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.jakewharton:butterknife:7.0.1'
