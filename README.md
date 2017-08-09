@@ -1,6 +1,6 @@
 ## Android Developer Nanodegree
 
-# FilmesPopulares
+# Popular Movies
 With the app, you can:
 * Discover the most popular, the most rated or the highest rated movies
 * Save favorite movies locally to view them even when offline
@@ -9,6 +9,13 @@ With the app, you can:
 
 
 ## Screens
+![screen](../master/Screenshot_1502243451.png)
+
+![screen](../master/Screenshot_1502243457.png)
+
+![screen](../master/Screenshot_1502243468.png)
+
+![screen](../master/Screenshot_1502243472.png)
 
 ## License
 
